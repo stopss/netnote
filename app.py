@@ -1,6 +1,9 @@
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 app = Flask(__name__)
 
+
+# test!!!
+
 # jwt 연결
 import jwt                                                                            #파이썬 인터프리터에서 jwt 추가해주세요!
 # 시간 날짜 형태 사용
