@@ -1,10 +1,123 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <!-- Webpage Title -->
+    <title>NetNote</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500&display=swap" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        body {
+            height: 100vh;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://assets.nflxext.com/ffe/siteui/vlv3/e316821f-7177-48f4-b748-e44a8b0840df/f3f5ddb4-62dd-4c72-b8fd-35320461da29/KR-ko-20220406-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .box {
+            width: 350px;
+            height: 100px;
+            background-color: transparent;
+            margin: 100px auto 0 auto;
+        }
+
+        .logogo {
+            font-size: xxx-large;
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .text{
+            font-size: x-large;
+            color: white;
+            text-align: center;
+        }
+
+        .main_in {
+            width: 350px;
+            height: 100px;
+            margin: 30px auto 0 auto;
+        }
+        .main_in > button{
+            font-family: 'Jua', sans-serif;
+            font-size: x-large;
+            background-color: darkred;
+            color: white;
+            width: 350px;
+            height: 100px;
+        }
+        .main_in > button:hover {
+            border: 2px solid white;
+        }
+        .suggest{
+            width: 360px;
+            margin: 20px auto 0 auto;
+        }
+        .idbtn1{
+            height: 40px;
+            background-color: transparent;
+            color: white;
+            border: 1px solid white;
+        }
+        .suggest > button:hover{
+            border: 2px solid white;
+        }
+        .idbtn2{
+            width: 100px;
+            height: 40px;
+            background-color: darkred;
+            color: white;
+        }
+        .idbtn3{
+            width: 100px;
+            height: 40px;
+            background-color: darkred;
+            color: white;
+        }
+    </style>
+    <script>
+
+    </script>
+
 </head>
 <body>
-
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <div class="logogo"><h1>NetNote</h1></div>
+        </div>
+        <div class="text">
+            <h1>회원님 반갑습니다.</h1>
+            <h1>넷플릭스 컨텐츠 추천은 NetNote에서!</h1>
+        </div>
+        <div class="main_in">
+            <button onclick="window.location.href='/main'">NetNote 입장하기</button>
+        </div>
+        <div class="suggest">
+            <button class="idbtn1">아이디를 잊으셨나요?</button>
+            <button class="idbtn2" onclick="window.location.href='/sign_up'">회원가입</button>
+            <button class="idbtn3" onclick="window.location.href='/login'">로그인</button>
+        </div>
+    </div>
+</section>
 </body>
 </html>
