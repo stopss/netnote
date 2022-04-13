@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>NetNote</title>
+
+    <style>
+        *,
+        *::before,
+        *::after {
+          box-sizing: border-box;
+        }
+        html {
+          background-color: #f0f0f0;
+        }
+        html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video { margin: 0; padding: 0; border: 0; font: inherit; vertical-align: baseline; } /* HTML5 display-role reset for older browsers */ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { display: block; }
+
+        body {
+          color: #999999;
+          font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          letter-spacing: 0;
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+          -moz-font-feature-settings: "liga" on;
+          margin:0;
+          padding: 0;
+          border: 0;
+        }
+        ol, ul {
+            list-style: none;
+        }
+        a {color: #000; text-decoration: none; outline: none}
+        a:hover, a:active {text-decoration: none; color:#fff;}
+
+        img {
+          height: auto;
+          max-width: 100%;
+          vertical-align: middle;
+        }
+        .cards {
+          display: flex;
+          flex-wrap: wrap;
+          list-style: none;
+          margin: 0;
+          padding: 0 3.5rem;
+        }
+        .cards__item {
+          display: flex;
+          padding: 1rem;
+        }
+        @media (min-width: 40rem) {
+          .cards__item {
+            width: 50%;
+          }
+        }
+        @media (min-width: 56rem) {
+          .cards__item {
+            width: 33.3333%;
+          }
+        }
+        @media (min-width: 80rem) {
+          .cards__item {
+            width: 25%;
+          }
+        }
+        .card {
+          width: 100%;
+          background-color: white;
+          border-radius: 1rem;
+          box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+            cursor: pointer;
+        }
+        .card:hover .card__image {
+          filter: contrast(100%);
+        }
+        .card__content {
+          display: flex;
+          flex: 1 1 auto;
+          flex-direction: column;
+          padding: 1rem;
+        }
+        .card__image {
+          background-position: center center;
+          background-repeat: no-repeat;
+          background-size: cover;
+          filter: contrast(70%);
+          overflow: hidden;
+          position: relative;
+          transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
+          border-radius: 1rem;
+          height: 20rem;
+        }
+        .card__image::before {
+          content: "";
+          display: block;
+          padding-top: 56.25%;
+        }
+        @media (min-width: 40rem) {
+          .card__image::before {
+            padding-top: 66.6%;
+          }
+        }
+
+        .card__image--fence {
+          background-image: url(https://images.justwatch.com/poster/242709403/s592/nobadi.webp);
+        }
+        .card__title {
+            color: #696969;
+            font-size: 1.25rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding-bottom: 1rem;
+
+        }
+        .card__text {
+
+            flex: 1 1 auto;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+           overflow: hidden;
+
+        }
+
+
+        /*ir_so 접근성을 위한 숨김 텍스트*/
+        .ir_so {overflow: hidden; position: absolute; width: 0; height: 0; line-height: 0; text-indent: -9999px;}
+        /*header*/
+        header {
+            overflow: hidden;
+            width: 100%;
+            height: 150px;
+            background: #C4C4C4;
+            padding: 0 4.5rem;
+        }
+        .logo {
+            float: left;
+            font-size: 20px;
+            line-height: 150px;
+            color: #000;
+
+        }
+        .menu {
+            float: right;
+
+        }
+        .menu li {
+            float: left;
+            line-height: 150px;
+            text-align: center;
+            background: #C4C4C4;
+            padding-left: 50px;
+        }
+        .menu li a {
+            font-size: 20px;
+        }
+
+        .tab {
+            padding: 0 4.5rem;
+            overflow: hidden;
+        }
+        .day {
+
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 2rem;
+            transform: rotate(90deg);
+            display: inline-block;
+
+        }
+        .tab_item {
+            float: left;
+            margin: 1.5rem 40px 1rem 0;
+            text-align: center;
+        }
+        .tab_item button {
+            padding: 10px 1px;
+            border: none;
+            border-bottom: 1px solid #000;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /*모달창*/
+        .model_url {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+
+        .model_url.show {
+            display: flex;
+        }
+
+        .model_url div {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 45rem;
+            height: 25rem;
+            transform: translate(-50%,-50%);
+            background: #eee;
+        }
+        .model_url p {
+            padding: 5rem 0 2rem;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .model_url #url {
+            height: 60px;
+            font-size: 16px;
+            width: 30rem;
+            padding: 5px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .model_url #submit {
+            display: block;
+            margin: 2rem auto;
+            width: 10rem;
+            font-size: 16px;
+            padding: 10px;
+        }
+
+        .model_url .close {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <!---- 헤더 영역 ---->
+        <header>
+            <h1 class="logo"><a href="/">로고</a></h1>
+            <ul class="menu">
+                <li id="url_open"><a href="#">기록하기</a></li>
+                <li><a href="#">마이페이지</a></li>
+                <li><a href="#">로그인</a></li>
+            </ul>
+        </header>
+
+        <!---- 섹션 영역 --->
+        <section>
+            <div class="tab_wrap">
+                <!-- 탭 목록 -->
+                <ul class="tab">
+                    <!-- 탭 목록 활성화 클래스 active -->
+                    <li class="tab_item active">
+                        <button type="button">MOVIE</button>
+                    </li>
+                    <li class="tab_item active">
+                        <button type="button">MOVIE</button>
+                    </li>
+                </ul>
+                <!-- 탭 패널 wrap -->
+                <!-- 탭 패널 활성화 클래스 active  -->
+                <div class="tab_panel_wrap">
+                    <h3 class="ir_so">영화</h3>
+                    <!-- 탭 패널 -->
+                    <ul class="cards" id="card_list"></ul>
+                </div>
+            </div>
+        </section>
+        <div class="model_url">
+            <div>
+                <p>
+                    넷플릭스에서 제공하는<br/>컨텐츠의 URL을 입력하세요<br/>
+                    Ex) https://www.justwatch.com/kr/%EC%98%81%ED%99%94/svart-krabba
+                </p>
+                <input id="url" type="text" placeholder="fueihf/eif;kfhjei/fe.com">
+                <input onClick="urlSave()" id="submit" type="submit" value="기록하기">
+                <button class="close">닫기</button>
+            </div>
+        </div>
+    </div>
+    <!-- script-->
+    <script>
+        // Modeal : open, close
+        const open = document.querySelector('#url_open');
+        const modalContainer = document.querySelector('.model_url');
+        const close = document.querySelector('.close');
+
+        const openModal = () => {
+            modalContainer.classList.add('show');
+        }
+        const closeModal = (event) => {
+            if(event.target === close) {
+                modalContainer.classList.remove('show');
+            }
+        }
+
+        open.addEventListener("click", openModal)
+        close.addEventListener("click", closeModal)
+
+
+
+        // db연결
+        $(document).ready(function () {
+            listing();
+        });
+
+        // db 기록 가져오기
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/netnote/main',
+                data: {},
+                success: function (response) {
+                    let rows = response['movies']
+                    console.log(rows)
+
+                    for(let i = 0; i < rows.length; i++){
+                        let title = rows[i]['title']
+                        let memo = rows[i]['memo']
+                        let img = rows[i]['img']
+                        let date = rows[i]['date']
+
+                        let temp_html = `<li class="cards__item">
+                                            <div class="card">
+                                            <input type="hidden" name="objId" value="">
+                                              <div class="card__content">
+                                                <div class="card__title">${title}</div>
+                                                    <p class="card__text">
+                                                        ${memo}
+                                                    </p>
+                                                </div>
+                                              <div class="card__image" style="background-image: url(${img})">
+                                                <span class="day">${date}</span>
+                                              </div>
+                                            </div>
+                                          </li>`
+
+                        $('#card_list').append(temp_html)
+                    }
+
+                }
+            })
+        }
+
+        // url 저장
+        function urlSave() {
+            let url = $("#url").val()
+
+            $.ajax({
+                type: 'POST',
+                url: '/netnote/geturl',
+                data: {url: url},
+                success: function (response) {
+                    alert(response['msg'])
+
+                }
+            });
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Webpage Title -->
+    <title>login</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bulma CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500&display=swap" rel="stylesheet">
+
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+
+        body {
+            height: 100vh;
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://assets.nflxext.com/ffe/siteui/vlv3/e316821f-7177-48f4-b748-e44a8b0840df/f3f5ddb4-62dd-4c72-b8fd-35320461da29/KR-ko-20220406-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .box {
+            width: 500px;
+            height: 430px;
+            margin: 100px auto 0 auto;
+        }
+
+        .logogo {
+            font-size: xxx-large;
+            color: darkred;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .button.is-sparta {
+            background-color: darkred;
+            border-color: transparent;
+            color: #fff;
+        }
+
+        .button.is-sparta.is-outlined {
+            background-color: transparent;
+            border-color: darkred;
+            color: darkred;
+        }
+    </style>
+
+    <script>
+        function sign_in() {
+            let id = $("#input-username").val()               // id값을 읽어옴.
+            let pw = $("#input-password").val()               // pw값을 읽어옴.
+
+            if (id == "") {
+                $("#help-id-login").text("아이디를 입력해주세요.")     // 아이디의 값들이 빈 값인지 아닌지 검사. -> ""(아이디 창이 비어 있으면) text를 보여줌.
+                $("#input-username").focus()
+                return;
+            } else {
+                $("#help-id-login").text("")
+            }
+
+            if (pw == "") {
+                $("#help-password-login").text("비밀번호를 입력해주세요.")   // 비밀번호의 값들이 빈 값인지 아닌지 검사. -> ""(pw 창이 비어 있으면) text를 보여줌.
+                $("#input-password").focus()
+                return;
+            } else {
+                $("#help-password-login").text("")
+            }
+            $.ajax({
+                type: "POST",
+                url: "/login",
+                data: {
+                    id_give: id,
+                    pw_give: pw
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        $.cookie('token', response['token'], {path: '/'});
+                        window.location.href = '/main'
+
+                    } else {
+                        alert(response['msg'])
+                    }
+                }
+            });
+        }
+    </script>
+
+</head>
+<body>
+<section class="section">
+    <div class="container">
+        <div class="box">
+            <div class="logogo"><h1>NetNote</h1></div>
+            <article class="media">
+                <div class="media-content">
+                    <div class="content">
+                        <div class="field has-addons">
+                            <div class="control has-icons-left" style="width:100%">
+                                <input id="input-username" class="input" type="text" placeholder="ID">
+                                <span class="icon is-small is-left"><i class="fa fa-user"></i></span>
+                            </div>
+                            <div id="btn-check-dup" class="control">
+                            </div>
+                        </div>
+                        <p id="help-id-login" class="help is-danger"></p>
+                        <div class="field">
+                            <div class="control has-icons-left">
+                                <input id="input-password" class="input" type="password" placeholder="PASSWORD">
+                                <span class="icon is-small is-left"><i class="fa fa-lock"></i></span>
+                            </div>
+                        </div>
+                        <p id="help-password-login" class="help is-danger"></p>
+
+                    </div>
+                    <div id="div-sign-in-or-up" class="has-text-centered">
+                        <nav class="level is-mobile">
+                            <button class="level-item button is-sparta" onclick="sign_in()">
+                                로그인
+                            </button>
+                        </nav>
+                        <hr>
+                        <h4 class="mb-3">아직 회원이 아니시라구요? </h4>
+                        <nav class="level is-mobile">
+                            <button class="level-item button is-sparta is-outlined"
+                                    onclick="window.location.href='/sign_up'">
+                                회원가입하기
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
+</body>
+</html>
