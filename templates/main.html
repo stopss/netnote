@@ -294,9 +294,11 @@
                     넷플릭스에서 제공하는<br/>컨텐츠의 URL을 입력하세요<br/>
                     Ex) https://www.justwatch.com/kr/%EC%98%81%ED%99%94/svart-krabba
                 </p>
-                <input id="url" type="text" placeholder="fueihf/eif;kfhjei/fe.com">
-                <input onClick="urlSave()" id="submit" type="submit" value="기록하기">
-                <button class="close">닫기</button>
+                <form name="form" id="form" action="/netnote/geturl" method="POST">
+                    <input id="url" name="url" type="text" placeholder="fueihf/eif;kfhjei/fe.com">
+                    <input id="submit" type="submit" value="기록하기">
+                    <button class="close">닫기</button>
+                </form>
             </div>
         </div>
     </div>
@@ -365,19 +367,20 @@
         }
 
         // url 저장
-        function urlSave() {
-            let url = $("#url").val()
-
-            $.ajax({
-                type: 'POST',
-                url: '/netnote/geturl',
-                data: {url: url},
-                success: function (response) {
-                    alert(response['msg'])
-
-                }
-            });
-        }
+        // function urlSave() {
+        //     let url = $("#url").val()
+        //
+        //     $.ajax({
+        //         type: 'POST',
+        //         url: '/netnote/geturl',
+        //         data: {url: url},
+        //         success: function (response) {
+        //             // alert(response['url']);
+        //             window.location.href =  '/netnote/write/'+url;
+        //
+        //         }
+        //     });
+        // }
 
 
 
