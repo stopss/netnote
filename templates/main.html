@@ -394,6 +394,23 @@
         //     });
         // }
 
+        $(document).on("click",".cards__item",function(){
+            let card_title = $(this).find('.card__title').text()
+            console.log(card_title)
+
+            $.ajax({
+                type: "POST",
+                url: "/netnote/view",
+                data: {title_give: card_title},
+                success: function (result) {
+                    alert('전달 성공')
+                },
+                error: function (){
+                    alert('전달 실패')
+                }
+            })
+
+        });
 
 
 
