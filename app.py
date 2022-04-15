@@ -179,12 +179,15 @@ def write_post():
     return redirect(url_for('main'))
 
 
-@app.route("/netnote/view", methods=["GET"])
+@app.route("/netnote/view", methods=["POST"])
 def view_get():
     print("view")
-    objId_receive = "6254557f6626d6d50173d193"
+    title_receive = request.form['title_give']
+    print(title_receive)
+    # objId_receive = "6254557f6626d6d50173d193"
 
-    doc = db.movies.find_one({'_id': ObjectId(objId_receive)})
+    doc = db.movies.find_one({'title': title_receive})
+    print(doc)
 
     return render_template('view.html', data=doc)
 
