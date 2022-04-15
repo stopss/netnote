@@ -33,12 +33,12 @@ def home():
 # 로그인 시간이 만료되면 홈으로 이동.
 @app.route('/')
 def login_over():
-    token_receive = request.cookies.get('mytoken')
+    token_receive = request.cookies.get('token')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         return render_template('home.html')
     except jwt.ExpiredSignatureError:
-        return redirect(url_for("login", msg="로그인 시간이 만료되었습니다."))
+        return redirect(url_for("login"))
 
 
 @app.route('/login')
