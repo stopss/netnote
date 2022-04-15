@@ -115,11 +115,8 @@ def write_get():
 
     title = soup.select_one(
         '#base > div.jw-info-box > div > div.jw-info-box__container-content > div:nth-child(2) > div.title-block__container > div.title-block > div > h1').text
-
-    # base > div.jw-info-box > div > div.jw-info-box__container-sidebar > div > aside > div.hidden-sm.visible-md.visible-lg.title-sidebar__desktop > div.title-info > div:nth-child(5) > div.detail-infos__value > span > a
-    # base > div.jw-info-box > div > div.jw-info-box__container-sidebar > div > aside > div.hidden-sm.visible-md.visible-lg.title-sidebar__desktop > div.title-info > div:nth-child(6) > div.detail-infos__value > span > a
-    director = soup.select_one(
-        '#base > div.jw-info-box > div > div.jw-info-box__container-sidebar > div > aside > div.hidden-sm.visible-md.visible-lg.title-sidebar__desktop > div.title-info > div:nth-child(5) > div.detail-infos__value > span > a').text
+    director = soup.select_one('.title-credit-name').text
+    print("director:" + director)
     image = soup.select_one('meta[property="og:image"]')['content']
 
     # db.movies.update_one({'_id': objId}, {'$set':{'title':title, 'director':director, 'image':image}})
@@ -127,7 +124,7 @@ def write_get():
     doc = {
         'title': title,
         'director': director,
-        'image': image,
+        'img': image,
         'url': get_url
     }
 
@@ -136,6 +133,19 @@ def write_get():
 
 @app.route("/netnote/write", methods=["POST"])
 def write_post():
+    token_receive = request.cookies.get('token')
+    user_info = ""
+
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({'id': payload['id2']})['id']
+    except jwt.ExpiredSignatureError:
+        # 로그인 시간 만료
+        return redirect(url_for("login"))
+    except jwt.exceptions.DecodeError:
+        # 로그인 정보 존재x
+        return redirect(url_for("login"))
+
     print("기록 저장하기")
     url_receive = request.form['url']
     director_receive = request.form['director']
@@ -151,12 +161,13 @@ def write_post():
     doc = {
         'title': title_receive,
         'director': director_receive,
-        'image': image_receive,
+        'img': image_receive,
         'url': url_receive,
         'date': date_receive,
         'together': together_receive,
         'memo': memo_receive,
-        'star': star_receive
+        'star': star_receive,
+        'writer': user_info
     }
     if category_receive == "영화":
         db.movies.insert_one(doc)
@@ -164,8 +175,6 @@ def write_post():
         db.dramas.insert_one(doc)
     else:
         db.kids.insert_one(doc)
-
-
 
     return redirect(url_for('main'))
 
@@ -183,7 +192,22 @@ def view_get():
 # main page -eunjin-
 @app.route("/main")
 def main():
+    token_receive = request.cookies.get('token')
+
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        user_info = db.users.find_one({'id': payload['id2']})
+        return render_template('main.html', id=user_info['id'])
+    except jwt.ExpiredSignatureError:
+        # 로그인 시간 만료
+        return redirect(url_for("login"))
+    except jwt.exceptions.DecodeError:
+        # 로그인 정보 x
+        return render_template('main.html', id="")
+
     return render_template('main.html')
+
+
 
 
 # DB에 저장된 유저 기록 요청
