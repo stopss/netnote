@@ -10,6 +10,7 @@
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <title>NetNote</title>
 
     <style>
@@ -253,6 +254,13 @@
 
 
     </style>
+    <script>
+        function logout() {
+            $.removeCookie('token', {path: '/'});
+            alert('로그아웃!');
+            window.location.href = "/";
+        }
+    </script>
 </head>
 <body>
     <div class="wrap">
@@ -260,9 +268,13 @@
         <header>
             <h1 class="logo"><a href="/">로고</a></h1>
             <ul class="menu">
-                <li id="url_open"><a href="#">기록하기</a></li>
-                <li><a href="#">마이페이지</a></li>
+                {% if id == "" %}
+                <li><a href="#">회원가입</a></li>
                 <li><a href="#">로그인</a></li>
+                {% else %}
+                <li id="url_open"><a href="#">기록하기</a></li>
+                <li><a href="#" onclick="logout()">로그아웃</a></li>
+                {% endif %}
             </ul>
         </header>
 
@@ -382,6 +394,23 @@
         //     });
         // }
 
+        $(document).on("click",".cards__item",function(){
+            let card_title = $(this).find('.card__title').text()
+            console.log(card_title)
+
+            $.ajax({
+                type: "POST",
+                url: "/netnote/view",
+                data: {title_give: card_title},
+                success: function (result) {
+                    alert('전달 성공')
+                },
+                error: function (){
+                    alert('전달 실패')
+                }
+            })
+
+        });
 
 
 
