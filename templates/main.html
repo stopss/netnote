@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"#}
+{#    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">#}
 
     <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{#    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"#}
+{#    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>#}
     <script src=" https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+    <link rel="shortcut icon" href="#">
     <title>NetNote</title>
 
     <style>
@@ -49,6 +50,18 @@
           max-width: 100%;
           vertical-align: middle;
         }
+        .tab_panel_wrap {
+            position: relative;
+        }
+        .tab_panel_wrap > div {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .tab_panel_wrap > div.active {
+            display: block;
+        }
         .cards {
           display: flex;
           flex-wrap: wrap;
@@ -60,7 +73,7 @@
           display: flex;
           padding: 1rem;
         }
-        @media (min-width: 40rem) {
+        @media (min-width: 38rem) {
           .cards__item {
             width: 50%;
           }
@@ -103,7 +116,7 @@
           position: relative;
           transition: filter 0.5s cubic-bezier(0.43, 0.41, 0.22, 0.91);
           border-radius: 1rem;
-          height: 20rem;
+          height: 23rem;
         }
         .card__image::before {
           content: "";
@@ -116,20 +129,24 @@
           }
         }
 
-        .card__image--fence {
-          background-image: url(https://images.justwatch.com/poster/242709403/s592/nobadi.webp);
-        }
         .card__title {
             color: #696969;
             font-size: 1.25rem;
             font-weight: 300;
             letter-spacing: 2px;
-            text-transform: uppercase;
             padding-bottom: 1rem;
-
         }
-        .card__text {
+        .day {
+            display: inline-block;
+            position: absolute;
+            bottom: 3.5rem;
+            right: -1rem;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            transform: rotate(90deg);
+        }
 
+        .card__text {
             flex: 1 1 auto;
             font-size: 0.875rem;
             line-height: 1.5;
@@ -137,10 +154,7 @@
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
            overflow: hidden;
-
         }
-
-
         /*ir_so 접근성을 위한 숨김 텍스트*/
         .ir_so {overflow: hidden; position: absolute; width: 0; height: 0; line-height: 0; text-indent: -9999px;}
         /*header*/
@@ -177,22 +191,13 @@
             background: #C4C4C4;
             padding-left: 50px;
         }
+
         .menu li a {
             font-size: 20px;
         }
-
         .tab {
             padding: 0 4.5rem;
             overflow: hidden;
-        }
-        .day {
-
-            color: #ffffff;
-            font-weight: 700;
-            font-size: 2rem;
-            transform: rotate(90deg);
-            display: inline-block;
-
         }
         .tab_item {
             float: left;
@@ -266,7 +271,7 @@
         function logout() {
             $.removeCookie('token', {path: '/'});
             alert('로그아웃!');
-            window.location.href = "/";
+            window.location.href = "/main";
         }
     </script>
 </head>
@@ -274,11 +279,13 @@
     <div class="wrap">
         <!---- 헤더 영역 ---->
         <header>
-            <h1 class="logo"><a href="/"></a></h1>
+            <h1 class="logo"><a href="/main">로고</a></h1>
+
             <ul class="menu">
                 {% if id == "" %}
-                <li><a href="#">회원가입</a></li>
-                <li><a href="#">로그인</a></li>
+                <li><a href="/sign_up">회원가입</a></li>
+                <li><a href="/login">로그인</a></li>
+                <li id="url_open" style="display: none"><a href="#">기록하기</a></li>
                 {% else %}
                 <li id="url_open"><a href="#">기록하기</a></li>
                 <li><a href="#" onclick="logout()">로그아웃</a></li>
@@ -293,18 +300,23 @@
                 <ul class="tab">
                     <!-- 탭 목록 활성화 클래스 active -->
                     <li class="tab_item active">
-                        <button type="button">MOVIE</button>
+                        <button type="button">영화</button>
                     </li>
-                    <li class="tab_item active">
-                        <button type="button">MOVIE</button>
+                    <li class="tab_item">
+                        <button type="button">TV프로그램</button>
                     </li>
                 </ul>
                 <!-- 탭 패널 wrap -->
                 <!-- 탭 패널 활성화 클래스 active  -->
                 <div class="tab_panel_wrap">
-                    <h3 class="ir_so">영화</h3>
-                    <!-- 탭 패널 -->
-                    <ul class="cards" id="card_list"></ul>
+                    <div class="movie_panel active">
+                        <h3 class="ir_so">영화</h3>
+                        <ul class="cards" id="card_list"></ul>
+                    </div>
+                    <div class="tv_panel">
+                        <h3 class="ir_so">티비프로그램</h3>
+                        <ul class="cards" id="card_list"></ul>
+                    </div>
                 </div>
             </div>
         </section>
@@ -312,13 +324,13 @@
             <div>
                 <p>
                     넷플릭스에서 제공하는<br/>컨텐츠의 URL을 입력하세요<br/>
-                    Ex) https://www.justwatch.com/kr/%EC%98%81%ED%99%94/svart-krabba
+                    ex) https://www.justwatch.com/kr
                 </p>
-                <form name="form" id="form" action="/netnote/geturl" method="POST">
-                    <input id="url" name="url" type="text" placeholder="fueihf/eif;kfhjei/fe.com">
+                <form name="form" id="form" method="POST">
+                    <input id="url" name="url" type="text" placeholder="url을 입력해주세요">
                     <input id="submit" type="submit" value="기록하기">
-                    <button class="close">닫기</button>
                 </form>
+                <button class="close">닫기</button>
             </div>
         </div>
     </div>
@@ -329,17 +341,35 @@
         const modalContainer = document.querySelector('.model_url');
         const close = document.querySelector('.close');
 
+
         const openModal = () => {
             modalContainer.classList.add('show');
         }
         const closeModal = (event) => {
-            if(event.target === close) {
+            if(event.target === close || event.target === modalContainer) {
                 modalContainer.classList.remove('show');
             }
         }
 
+
+
+
         open.addEventListener("click", openModal)
         close.addEventListener("click", closeModal)
+        modalContainer.addEventListener("click", closeModal)
+
+        // tab_manu : click -> tab_panel
+	    var tabBtn = $(".tab_item");
+        var tabCont = $(".tab_panel_wrap > div");
+
+        tabBtn.click(function(){
+          var target = $(this);
+          var index = target.index();   //버튼의 순서를 변수에 저장
+          tabBtn.removeClass("active");    //버튼의 클래스를 삭제
+          target.addClass("active");       //타겟의 클래스를 추가
+          tabCont.css("display","none");
+          tabCont.eq(index).css("display","block");
+        });
 
 
 
@@ -355,14 +385,14 @@
                 url: '/netnote/main',
                 data: {},
                 success: function (response) {
-                    let rows = response['movies']
-                    console.log(rows)
+                    let movie_rows = response['movies']
+                    let drama_rows = response['dramas']
 
-                    for(let i = 0; i < rows.length; i++){
-                        let title = rows[i]['title']
-                        let memo = rows[i]['memo']
-                        let img = rows[i]['img']
-                        let date = rows[i]['date']
+                    for(let i = 0; i < movie_rows.length; i++){
+                        let title = movie_rows[i]['title']
+                        let memo = movie_rows[i]['memo']
+                        let img = movie_rows[i]['img']
+                        let date = movie_rows[i]['date']
 
                         let temp_html = `<li class="cards__item">
                                             <div class="card">
@@ -378,12 +408,36 @@
                                             </div>
                                           </li>`
 
-                        $('#card_list').append(temp_html)
+                        $('.movie_panel > ul').append(temp_html)
+                    }
+                    for(let i = 0; i < drama_rows.length; i++){
+                        let title = drama_rows[i]['title']
+                        let memo = drama_rows[i]['memo']
+                        let img = drama_rows[i]['img']
+                        let date = drama_rows[i]['date']
+
+                        let dr_temp_html = `<li class="cards__item">
+                                            <div class="card">
+                                            <input type="hidden" name="objId" value="">
+                                              <div class="card__content">
+                                                <div class="card__title">${title}</div>
+                                                    <p class="card__text">
+                                                        ${memo}
+                                                    </p>
+                                                </div>
+                                              <div class="card__image" style="background-image: url(${img})">
+                                                <span class="day">${date}</span>
+                                              </div>
+                                            </div>
+                                          </li>`
+
+                        $('.tv_panel > ul').append(dr_temp_html)
                     }
 
                 }
             })
         }
+
 
         $(document).on("click",".cards__item",function(){
             let card_title = $(this).find('.card__title').text()
@@ -391,8 +445,6 @@
 
             window.location.href='/netnote/view?title='+card_title
         });
-
-
 
 
 
