@@ -20,7 +20,7 @@ from bson.objectid import ObjectId  # db에서 object id값 가져올 때 사용
 import certifi  # 파이썬 인터프리터에서 certifi 추가해주세요.
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.x85pm.mongodb.net/Cluster0?retryWrites=true&w=majority',
+client = MongoClient('mongodb+srv://sparta:test@cluster0.gqkk6.mongodb.net/Cluster0?retryWrites=true&w=majority',
                      tlsCAFile=certifi.where())
 db = client.dbnetnote
 
@@ -28,6 +28,7 @@ db = client.dbnetnote
 @app.route('/')
 def home():
     return render_template('home.html')
+
 
 
 # 로그인 시간이 만료되면 홈으로 이동.
@@ -139,6 +140,7 @@ def write_post():
         return redirect(url_for("login"))
 
     url_receive = request.form['url']
+
     director_receive = request.form['director'].strip()
     title_receive = request.form['title'].strip()
     image_receive = request.form['image']
@@ -168,6 +170,7 @@ def write_post():
 
     return redirect(url_for('main'))
 
+
 @app.route("/netnote/view", methods=["GET"])
 def view_get():
 
@@ -177,14 +180,14 @@ def view_get():
 
 @app.route("/netnote/detail", methods=["GET"])
 def view_detail():
-
     get_title = request.args.get('title')
     doc = db.movies.find_one({'title': get_title})
 
     return render_template('view.html', data=doc)
 
+
 # main page -eunjin-
-@app.route("/main")
+@app.route("/main", methods=["GET","POST"])
 def main():
     token_receive = request.cookies.get('token')
 
@@ -198,7 +201,6 @@ def main():
     except jwt.exceptions.DecodeError:
     #     # 로그인 정보 x
         return render_template('main.html', id="")
-        # return redirect(url_for("movie_get", id=""))
 
 
 
@@ -207,9 +209,10 @@ def main():
 @app.route("/netnote/main", methods=["GET"])
 def movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
+    dramas_list = list(db.dramas.find({}, {'_id': False}))
 
-    return jsonify({'movies': movie_list})
-    # return render_template('main.html', movies=movie_list)
+    return jsonify({'movies': movie_list, 'dramas':dramas_list})
+
 
 
 # URL DB에 저장
