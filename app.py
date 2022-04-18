@@ -30,6 +30,7 @@ def home():
     return render_template('home.html')
 
 
+
 # 로그인 시간이 만료되면 홈으로 이동.
 @app.route('/')
 def login_over():
@@ -148,6 +149,7 @@ def write_post():
 
     print("기록 저장하기")
     url_receive = request.form['url']
+
     director_receive = request.form['director']
     title_receive = request.form['title']
     image_receive = request.form['image']
@@ -161,7 +163,7 @@ def write_post():
     doc = {
         'title': title_receive,
         'director': director_receive,
-        'img': image_receive,
+         'img': image_receive,
         'url': url_receive,
         'date': date_receive,
         'together': together_receive,
@@ -179,18 +181,17 @@ def write_post():
     return redirect(url_for('main'))
 
 
-@app.route("/netnote/view", methods=["GET"])
+@app.route("/netnote/view", methods=["POST"])
 def view_get():
-    print("view")
-    objId_receive = "6254557f6626d6d50173d193"
-
-    doc = db.movies.find_one({'_id': ObjectId(objId_receive)})
-
-    return render_template('view.html', data=doc)
+    title5 = request.form['title_give']
+    print(title5)
+    # objId_receive = "6254557f6626d6d50173d193"
+    # doc = db.movies.find_one({'_id': ObjectId(objId_receive)})
+    return render_template('view.html')
 
 
 # main page -eunjin-
-@app.route("/main")
+@app.route("/main", methods=["GET","POST"])
 def main():
     token_receive = request.cookies.get('token')
 
@@ -205,7 +206,7 @@ def main():
         # 로그인 정보 x
         return render_template('main.html', id="")
 
-    return render_template('main.html')
+    # return render_template('main.html')
 
 
 
@@ -214,8 +215,10 @@ def main():
 @app.route("/netnote/main", methods=["GET"])
 def movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
+    dramas_list = list(db.dramas.find({}, {'_id': False}))
 
-    return jsonify({'movies': movie_list})
+    return jsonify({'movies': movie_list, 'dramas': dramas_list })
+
 
 
 # URL DB에 저장

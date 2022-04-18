@@ -148,8 +148,11 @@
 
     </style>
     <script>
+
         $(document).ready(function () {
             show_star();
+
+            {#localStorage.getItem('title')#}
         });
 
         function show_star(){
@@ -168,6 +171,8 @@
                 }
             });
         }
+        // main에서 title 가져오기
+
     </script>
 
 </head>
@@ -198,66 +203,66 @@
         </section>
 
         <!--    본문 -->
-        <div class="mybox">
-                <input type="hidden" name="objId" value="{{data['_id']}}">
-                <div class="form-floating mb-3">
-                    <img class="poster" src="{{data['image']}}" alt="포스터입니다">
-                </div>
-                <div class="row mb-3">
-                    <label for="title" class="col-sm-2 col-form-label">제목</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="title" id="title" value="{{data['title']}}" disabled>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="director" class="col-sm-2 col-form-label">감독</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="director" id="director" value="{{data['director']}}"
-                               disabled>
-                    </div>
-                </div>
-                <!-- 카테고리 -->
-<!--                <div class="row mb-3">-->
-<!--                    <label for="category" class="col-sm-2 col-form-label">카테고리</label>-->
-<!--                    <div class="col-sm-10">-->
-<!--                        <select class="form-select" aria-label="Default select example" name="category" id="category">-->
-<!--                            <option selected>카테고리를 선택하세요</option>-->
-<!--                            <option value="영화">영화</option>-->
-<!--                            <option value="드라마">드라마</option>-->
-<!--                            <option value="키즈">키즈</option>-->
-<!--                        </select>-->
-<!--                    </div>-->
-<!--                </div>-->
-
-                <div class="row mb-3">
-                    <label for="date" class="col-sm-2 col-form-label">날짜</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="date" id="date" value="{{data['date']}}" disabled>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="together" class="col-sm-2 col-form-label">함께 본 사람</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" name="together" id="together" value="{{data['together']}}" disabled>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label for="memo" class="col-sm-2 col-form-label">메모</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" name="memo" id="memo" rows="5" style="overflow-y:scroll;" disabled>{{data['memo']}}</textarea>
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">별점</label>
-                    <div class="col-sm-10">
-                    <input type="hidden" name="star" id="star" value="{{data['star']}}">
-                        <fieldset id="star_rating">
-
-                        </fieldset>
-                    </div>
-
-                </div>
-        </div>
+{#        <div class="mybox">#}
+{#                <input type="hidden" name="objId" value="{{data['_id']}}">#}
+{#                <div class="form-floating mb-3">#}
+{#                    <img class="poster" src="{{data['image']}}" alt="포스터입니다">#}
+{#                </div>#}
+{#                <div class="row mb-3">#}
+{#                    <label for="title" class="col-sm-2 col-form-label">제목</label>#}
+{#                    <div class="col-sm-10">#}
+{#                        <input type="text" class="form-control" name="title" id="title" value="{{data['title']}}" disabled>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row mb-3">#}
+{#                    <label for="director" class="col-sm-2 col-form-label">감독</label>#}
+{#                    <div class="col-sm-10">#}
+{#                        <input type="text" class="form-control" name="director" id="director" value="{{data['director']}}"#}
+{#                               disabled>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <!-- 카테고리 -->#}
+{#<!--                <div class="row mb-3">-->#}
+{#<!--                    <label for="category" class="col-sm-2 col-form-label">카테고리</label>-->#}
+{#<!--                    <div class="col-sm-10">-->#}
+{#<!--                        <select class="form-select" aria-label="Default select example" name="category" id="category">-->#}
+{#<!--                            <option selected>카테고리를 선택하세요</option>-->#}
+{#<!--                            <option value="영화">영화</option>-->#}
+{#<!--                            <option value="드라마">드라마</option>-->#}
+{#<!--                            <option value="키즈">키즈</option>-->#}
+{#<!--                        </select>-->#}
+{#<!--                    </div>-->#}
+{#<!--                </div>-->#}
+{##}
+{#                <div class="row mb-3">#}
+{#                    <label for="date" class="col-sm-2 col-form-label">날짜</label>#}
+{#                    <div class="col-sm-10">#}
+{#                        <input type="text" class="form-control" name="date" id="date" value="{{data['date']}}" disabled>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row mb-3">#}
+{#                    <label for="together" class="col-sm-2 col-form-label">함께 본 사람</label>#}
+{#                    <div class="col-sm-10">#}
+{#                        <input type="text" class="form-control" name="together" id="together" value="{{data['together']}}" disabled>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row mb-3">#}
+{#                    <label for="memo" class="col-sm-2 col-form-label">메모</label>#}
+{#                    <div class="col-sm-10">#}
+{#                        <textarea class="form-control" name="memo" id="memo" rows="5" style="overflow-y:scroll;" disabled>{{data['memo']}}</textarea>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="row mb-3">#}
+{#                    <label class="col-sm-2 col-form-label">별점</label>#}
+{#                    <div class="col-sm-10">#}
+{#                    <input type="hidden" name="star" id="star" value="{{data['star']}}">#}
+{#                        <fieldset id="star_rating">#}
+{##}
+{#                        </fieldset>#}
+{#                    </div>#}
+{##}
+{#                </div>#}
+{#        </div>#}
     </div>
 </body>
 </html>
