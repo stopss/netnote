@@ -211,7 +211,7 @@ def movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
     dramas_list = list(db.dramas.find({}, {'_id': False}))
 
-    return jsonify({'movies': movie_list})
+    return jsonify({'movies': movie_list, 'dramas':dramas_list})
 
 
 

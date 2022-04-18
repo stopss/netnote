@@ -344,7 +344,7 @@
 
 
 
-        
+
         open.addEventListener("click", openModal)
         close.addEventListener("click", closeModal)
         modalContainer.addEventListener("click", closeModal)
@@ -354,7 +354,7 @@
         var tabCont = $(".tab_panel_wrap > div");
 
         tabBtn.click(function(){
-          var target = $(this);         //버튼의 타겟(순서)을 변수에 저장
+          var target = $(this);
           var index = target.index();   //버튼의 순서를 변수에 저장
           tabBtn.removeClass("active");    //버튼의 클래스를 삭제
           target.addClass("active");       //타겟의 클래스를 추가
