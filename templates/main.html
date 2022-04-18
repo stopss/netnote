@@ -169,8 +169,16 @@
             float: left;
             font-size: 20px;
             line-height: 150px;
+            padding-top: 43px;
             color: #000;
-
+        }
+        .logo a{
+            width: 200px;
+            height: 80px;
+            background: url("/static/images/logo.png") no-repeat;
+            {#background-position: center;#}
+            background-size: contain;
+            display:block;
         }
         .menu {
             float: right;
@@ -272,6 +280,7 @@
         <!---- 헤더 영역 ---->
         <header>
             <h1 class="logo"><a href="/main">로고</a></h1>
+
             <ul class="menu">
                 {% if id == "" %}
                 <li><a href="/sign_up">회원가입</a></li>
