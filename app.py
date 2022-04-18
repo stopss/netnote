@@ -20,7 +20,7 @@ from bson.objectid import ObjectId  # db에서 object id값 가져올 때 사용
 import certifi  # 파이썬 인터프리터에서 certifi 추가해주세요.
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://sparta:test@cluster0.gqkk6.mongodb.net/Cluster0?retryWrites=true&w=majority',
+client = MongoClient('mongodb+srv://test:sparta@cluster0.x85pm.mongodb.net/Cluster0?retryWrites=true&w=majority',
                      tlsCAFile=certifi.where())
 db = client.dbnetnote
 
@@ -28,7 +28,6 @@ db = client.dbnetnote
 @app.route('/')
 def home():
     return render_template('home.html')
-
 
 
 # 로그인 시간이 만료되면 홈으로 이동.
@@ -173,21 +172,27 @@ def write_post():
 
 @app.route("/netnote/view", methods=["GET"])
 def view_get():
-
     title = request.args.get('title')
+    category = request.args.get('type')
 
-    return redirect(url_for('view_detail', title=title))
+    return redirect(url_for('view_detail', title=title, category=category))
+
 
 @app.route("/netnote/detail", methods=["GET"])
 def view_detail():
     get_title = request.args.get('title')
-    doc = db.movies.find_one({'title': get_title})
+    get_category = request.args.get('category')
+    doc = {}
+    if get_category == 'movie':
+        doc = db.movies.find_one({'title': get_title})
+    else:
+        doc = db.dramas.find_one({'title': get_title})
 
     return render_template('view.html', data=doc)
 
 
 # main page -eunjin-
-@app.route("/main", methods=["GET","POST"])
+@app.route("/main", methods=["GET", "POST"])
 def main():
     token_receive = request.cookies.get('token')
 
@@ -199,10 +204,8 @@ def main():
         # 로그인 시간 만료
         return redirect(url_for("login"))
     except jwt.exceptions.DecodeError:
-    #     # 로그인 정보 x
+        # 로그인 정보 x
         return render_template('main.html', id="")
-
-
 
 
 # DB에 저장된 유저 기록 요청
@@ -211,8 +214,7 @@ def movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
     dramas_list = list(db.dramas.find({}, {'_id': False}))
 
-    return jsonify({'movies': movie_list, 'dramas':dramas_list})
-
+    return jsonify({'movies': movie_list, 'dramas': dramas_list})
 
 
 # URL DB에 저장
