@@ -326,7 +326,7 @@
                     넷플릭스에서 제공하는<br/>컨텐츠의 URL을 입력하세요<br/>
                     ex) https://www.justwatch.com/kr
                 </p>
-                <form name="form" id="form" method="POST">
+                <form name="form" id="form" method="POST" action="/netnote/geturl">
                     <input id="url" name="url" type="text" placeholder="url을 입력해주세요">
                     <input id="submit" type="submit" value="기록하기">
                 </form>
@@ -397,6 +397,7 @@
                         let temp_html = `<li class="cards__item">
                                             <div class="card">
                                               <div class="card__content">
+                                                <div class="card__cateory" style="display:none">movie</div>
                                                 <div class="card__title">${title}</div>
                                                     <p class="card__text">
                                                         ${memo}
@@ -420,6 +421,7 @@
                                             <div class="card">
                                             <input type="hidden" name="objId" value="">
                                               <div class="card__content">
+                                                <div class="card__cateory" style="display:none">drama</div>
                                                 <div class="card__title">${title}</div>
                                                     <p class="card__text">
                                                         ${memo}
@@ -441,9 +443,9 @@
 
         $(document).on("click",".cards__item",function(){
             let card_title = $(this).find('.card__title').text()
-            console.log(card_title)
+            let card_category = $(this).find('.card__cateory').text()
 
-            window.location.href='/netnote/view?title='+card_title
+            window.location.href='/netnote/view?title='+card_title+'&type='+card_category
         });
 
 
