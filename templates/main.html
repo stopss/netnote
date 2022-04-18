@@ -429,34 +429,13 @@
             })
         }
 
-<<<<<<< HEAD
-         $(document).on("click",".cards__item",function(){
-            let card_title = $(this).find('.card__title').text()
-            console.log(card_title)
 
-            $.ajax({
-                type: "POST",
-                url: "/netnote/view",
-                data: {title_give: card_title},
-                success: function (result) {
-                    alert('전달 성공')
-                },
-                error: function (){
-                    alert('전달 실패')
-                }
-            })
-
-        });
-=======
         $(document).on("click",".cards__item",function(){
             let card_title = $(this).find('.card__title').text()
             console.log(card_title)
->>>>>>> ecfc6721c308e87a800518462bf5e9eea2eda85a
 
             window.location.href='/netnote/view?title='+card_title
         });
-
-
 
 
 

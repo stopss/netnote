@@ -140,14 +140,9 @@ def write_post():
         return redirect(url_for("login"))
 
     url_receive = request.form['url']
-<<<<<<< HEAD
 
-    director_receive = request.form['director']
-    title_receive = request.form['title']
-=======
     director_receive = request.form['director'].strip()
     title_receive = request.form['title'].strip()
->>>>>>> ecfc6721c308e87a800518462bf5e9eea2eda85a
     image_receive = request.form['image']
     category_receive = request.form['category']
     date_receive = request.form['date']
@@ -158,7 +153,7 @@ def write_post():
     doc = {
         'title': title_receive,
         'director': director_receive,
-         'img': image_receive,
+        'img': image_receive,
         'url': url_receive,
         'date': date_receive,
         'together': together_receive,
@@ -175,16 +170,7 @@ def write_post():
 
     return redirect(url_for('main'))
 
-<<<<<<< HEAD
 
-@app.route("/netnote/view", methods=["POST"])
-def view_get():
-    title5 = request.form['title_give']
-    print(title5)
-    # objId_receive = "6254557f6626d6d50173d193"
-    # doc = db.movies.find_one({'_id': ObjectId(objId_receive)})
-    return render_template('view.html')
-=======
 @app.route("/netnote/view", methods=["GET"])
 def view_get():
 
@@ -194,12 +180,11 @@ def view_get():
 
 @app.route("/netnote/detail", methods=["GET"])
 def view_detail():
-
     get_title = request.args.get('title')
     doc = db.movies.find_one({'title': get_title})
 
     return render_template('view.html', data=doc)
->>>>>>> ecfc6721c308e87a800518462bf5e9eea2eda85a
+
 
 # main page -eunjin-
 @app.route("/main", methods=["GET","POST"])
@@ -216,12 +201,6 @@ def main():
     except jwt.exceptions.DecodeError:
     #     # 로그인 정보 x
         return render_template('main.html', id="")
-<<<<<<< HEAD
-
-    # return render_template('main.html')
-=======
-        # return redirect(url_for("movie_get", id=""))
->>>>>>> ecfc6721c308e87a800518462bf5e9eea2eda85a
 
 
 
@@ -232,13 +211,8 @@ def movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
     dramas_list = list(db.dramas.find({}, {'_id': False}))
 
-    return jsonify({'movies': movie_list, 'dramas': dramas_list })
-
-<<<<<<< HEAD
-=======
     return jsonify({'movies': movie_list})
-    # return render_template('main.html', movies=movie_list)
->>>>>>> ecfc6721c308e87a800518462bf5e9eea2eda85a
+
 
 
 # URL DB에 저장
