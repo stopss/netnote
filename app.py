@@ -99,13 +99,7 @@ def sign_up_check():
 
 @app.route("/netnote/write", methods=["GET"])
 def write_get():
-    print("get")
     get_url = request.args.get('url')
-    print("write:" + get_url)
-    # url = url
-    # print("url:"+url)
-    # objId = db.movies.find_one({'url': get_url})['_id']
-    # print(objId)
 
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
@@ -118,8 +112,6 @@ def write_get():
     director = soup.select_one('.title-credit-name').text
     print("director:" + director)
     image = soup.select_one('meta[property="og:image"]')['content']
-
-    # db.movies.update_one({'_id': objId}, {'$set':{'title':title, 'director':director, 'image':image}})
 
     doc = {
         'title': title,
@@ -146,17 +138,15 @@ def write_post():
         # 로그인 정보 존재x
         return redirect(url_for("login"))
 
-    print("기록 저장하기")
     url_receive = request.form['url']
-    director_receive = request.form['director']
-    title_receive = request.form['title']
+    director_receive = request.form['director'].strip()
+    title_receive = request.form['title'].strip()
     image_receive = request.form['image']
     category_receive = request.form['category']
     date_receive = request.form['date']
     together_receive = request.form['together']
     memo_receive = request.form['memo']
     star_receive = request.form['star']
-    print(category_receive)
 
     doc = {
         'title': title_receive,
@@ -178,19 +168,20 @@ def write_post():
 
     return redirect(url_for('main'))
 
-
-@app.route("/netnote/view", methods=["POST"])
+@app.route("/netnote/view", methods=["GET"])
 def view_get():
-    print("view")
-    title_receive = request.form['title_give']
-    print(title_receive)
-    # objId_receive = "6254557f6626d6d50173d193"
 
-    doc = db.movies.find_one({'title': title_receive})
-    print(doc)
+    title = request.args.get('title')
+
+    return redirect(url_for('view_detail', title=title))
+
+@app.route("/netnote/detail", methods=["GET"])
+def view_detail():
+
+    get_title = request.args.get('title')
+    doc = db.movies.find_one({'title': get_title})
 
     return render_template('view.html', data=doc)
-
 
 # main page -eunjin-
 @app.route("/main")
@@ -205,10 +196,9 @@ def main():
         # 로그인 시간 만료
         return redirect(url_for("login"))
     except jwt.exceptions.DecodeError:
-        # 로그인 정보 x
+    #     # 로그인 정보 x
         return render_template('main.html', id="")
-
-    return render_template('main.html')
+        # return redirect(url_for("movie_get", id=""))
 
 
 
@@ -219,6 +209,7 @@ def movie_get():
     movie_list = list(db.movies.find({}, {'_id': False}))
 
     return jsonify({'movies': movie_list})
+    # return render_template('main.html', movies=movie_list)
 
 
 # URL DB에 저장
