@@ -54,6 +54,9 @@
             font-size: 3rem;
             color: #2641E2;
         }
+        a {
+            text-decoration: none;
+        }
         .media-content {
             margin-top: 16px;
         }
@@ -131,8 +134,7 @@
 
         //jQuery toggleClass()
         function toggle_sign_up(response) {
-            alert("로그인 페이지로 돌아갑니다.")
-            window.location.replace("/login")
+            window.location.replace("/")
         }
 
         //아이디, 패스워드 정규표현식
@@ -189,7 +191,7 @@
     <section class="section">
         <div class="container">
             <div class="box">
-            <h1>NetNote</h1>
+            <a href="/"><h1>NetNote</h1></a>
             <article class="media">
                 <div class="media-content">
                     <div class="content">
