@@ -20,7 +20,7 @@ from bson.objectid import ObjectId  # db에서 object id값 가져올 때 사용
 import certifi  # 파이썬 인터프리터에서 certifi 추가해주세요.
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.x85pm.mongodb.net/Cluster0?retryWrites=true&w=majority',
+client = MongoClient('',
                      tlsCAFile=certifi.where())
 db = client.dbnetnote
 
