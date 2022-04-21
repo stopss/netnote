@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/reset.css">
     <!-- bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -21,39 +22,58 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
-
     <style>
-        * {
-            font-family: 'Jua', sans-serif;
-        }
         body {
+            background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/8459cea4-79ab-4f27-9ef0-a7c92a30a9bb/cd501dc8-44a9-4ddf-a3cf-c8158cd3052c/KR-ko-20220411-popsignuptwoweeks-perspective_alpha_website_medium.jpg");
+            font-family: 'S-CoreDream-3Light' !important;
+        }
+        .section {
             height: 100vh;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://assets.nflxext.com/ffe/siteui/vlv3/e316821f-7177-48f4-b748-e44a8b0840df/f3f5ddb4-62dd-4c72-b8fd-35320461da29/KR-ko-20220406-popsignuptwoweeks-perspective_alpha_website_large.jpg");
             background-repeat: no-repeat;
             background-size: cover;
+            background-color: rgba(255,255,255,0.8);
+            padding: 0;
+        }
+        .container {
+            width: 100vw;
+            height: 100vh;
         }
         .box {
-            width: 500px;
-            height: 430px;
-            margin: 100px auto 0 auto;
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 540px;
+            height: 485px;
+            padding: 2rem 2.5rem;
         }
-        .logogo {
-            font-size: xx-large;
-            color: darkred;
+        h1 {
+            font-family: 'Jockey One', sans-serif;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
+            font-size: 3rem;
+            color: #2641E2;
+        }
+        .media-content {
+            margin-top: 16px;
         }
         .button.is-sparta {
-            background-color: darkred;
-            border-color: transparent;
+            background-color: #2E44FF;
             color: #fff;
+        }
+        .level-item.button.is-sparta {
+            height: 55px;
         }
         .button.is-sparta.is-outlined {
             background-color: transparent;
-            border-color: darkred;
-            color: darkred;
+            color: #2641E2;
+        }
+        .level.is-mobile .level-item:not(:last-child) {
+            margin-right: 2rem;
+            color: #9A9A9A;
+        }
+        .mb-5 {
+            margin-bottom: 2.5rem !important;
         }
     </style>
     <script>
@@ -165,11 +185,11 @@
 
 </head>
 <body>
-<!-- 회원가입 박스 -->
-<section class="section">
-    <div class="container">
-        <div class="box">
-            <div class="logogo"><h1>NetNote</h1></div>
+    <!-- 회원가입 박스 -->
+    <section class="section">
+        <div class="container">
+            <div class="box">
+            <h1>NetNote</h1>
             <article class="media">
                 <div class="media-content">
                     <div class="content">
@@ -210,13 +230,8 @@
                     </div>
                     <div id="sign-up-box2">
                         <nav class="level is-mobile">
-                            <button class="level-item button is-sparta" onclick="sign_up()">
-                                회원가입
-                            </button>
-                            <button class="level-item button is-sparta is-outlined"
-                                    onclick="toggle_sign_up()">
-                                취소
-                            </button>
+                            <button class="level-item button is-sparta is-outlined" onclick="toggle_sign_up()">취소</button>
+                            <button class="level-item button is-sparta" onclick="sign_up()">회원가입</button>
                         </nav>
                     </div>
                 </div>
