@@ -115,10 +115,6 @@
             padding: 0.375rem 0;
         }
 
-
-
-
-
         input[type="text"]:disabled {
             background: white;
         }
@@ -146,9 +142,6 @@
             color: transparent;
             text-shadow: 0 0 0 #f1bd17;
         }
-
-
-
 
         /*모달창*/
         .model_url {
@@ -216,16 +209,13 @@
             background-image: url('../static/images/close_btn.png');
         }
 
-
     </style>
     <script>
-
         function logout() {
             $.removeCookie('token', {path: '/'});
             alert('로그아웃!');
             window.location.href = "/";
         }
-
 
     </script>
     <script>
@@ -251,6 +241,7 @@
             modalContainer.addEventListener("click", closeModal)
         });
 
+        /* 별점 만들기 */
         function show_star(){
             let star = $('#star').val()
 
@@ -267,7 +258,6 @@
                 }
             });
         }
-
     </script>
 
 </head>
@@ -339,7 +329,6 @@
                         <fieldset id="star_rating">
                         </fieldset>
                     </div>
-
                 </div>
             </div>
         </section>

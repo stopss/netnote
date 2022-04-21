@@ -20,7 +20,7 @@ from bson.objectid import ObjectId  # db에서 object id값 가져올 때 사용
 import certifi  # 파이썬 인터프리터에서 certifi 추가해주세요.
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://sparta:test@cluster0.gqkk6.mongodb.net/Cluster0?retryWrites=true&w=majority',
+client = MongoClient('',
                      tlsCAFile=certifi.where())
 db = client.dbnetnote
 
@@ -96,21 +96,20 @@ def sign_up_check():
     exists = bool(db.users.find_one({"id": id_receive}))
     return jsonify({'result': 'success', 'exists': exists})
 
-
+# 크롤링 한 내용 글쓰기 페이지에 보여주기
 @app.route("/netnote/write", methods=["GET"])
 def write_get():
     get_url = request.args.get('url')
 
+    # 크롤링
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36'}
     data = requests.get(get_url, headers=headers)
-
     soup = BeautifulSoup(data.text, 'html.parser')
 
     title = soup.select_one(
         '#base > div.jw-info-box > div > div.jw-info-box__container-content > div:nth-child(2) > div.title-block__container > div.title-block > div > h1').text
     director = soup.select_one('.title-credit-name').text
-    print("director:" + director)
     image = soup.select_one('meta[property="og:image"]')['content']
 
     doc = {
@@ -119,10 +118,9 @@ def write_get():
         'img': image,
         'url': get_url
     }
-
     return render_template('write.html', data=doc)
 
-
+# 기록한 내용 DB 저장
 @app.route("/netnote/write", methods=["POST"])
 def write_post():
     token_receive = request.cookies.get('token')
@@ -139,7 +137,6 @@ def write_post():
         return redirect(url_for("login"))
 
     url_receive = request.form['url']
-
     director_receive = request.form['director'].strip()
     title_receive = request.form['title'].strip()
     image_receive = request.form['image']
@@ -169,7 +166,7 @@ def write_post():
 
     return redirect(url_for('main'))
 
-
+# 해당 카드에 적힌 정보 가져오기
 @app.route("/netnote/view", methods=["GET"])
 def view_get():
     title = request.args.get('title')
@@ -177,7 +174,7 @@ def view_get():
 
     return redirect(url_for('view_detail', title=title, category=category))
 
-
+# DB에서 가지고 온 데이터 뷰 페이지에 보여주기
 @app.route("/netnote/detail", methods=["GET"])
 def view_detail():
     get_title = request.args.get('title')
@@ -220,9 +217,7 @@ def movie_get():
 # URL DB에 저장
 @app.route('/netnote/geturl', methods=['POST'])
 def url_post():
-    print("geturl")
     url_receive = request.form['url']
-    print("geturl:" + url_receive)
 
     doc = {
         'url': url_receive

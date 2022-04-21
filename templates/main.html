@@ -313,7 +313,7 @@
             <div>
                 <strong>https://www.justwatch.com/kr</strong>
                 <p>위 링크를 통해 컨텐츠의 URL을 입력하세요</p>
-                <form name="form" id="form" method="POST" action="/netnote/geturl">
+                <form name="form" id="form" method="POST" action="/netnote/geturl" onsubmit="return checkURL()">
                     <input id="url" name="url" type="text">
                     <input id="submit" type="submit" value="기록하기">
                 </form>
@@ -359,7 +359,22 @@
         tabCont.eq(index).css("display","block");
     });
 
+    // url 유효성 검사
+    function checkURL() {
+        let url = $("#url").val()
+        let findurl = "https://www.justwatch.com/kr"
 
+        if(url == ""){
+            window.alert("URL 주소를 입력해 주세요");
+            document.form.url.focus();
+            return false;
+        }
+        if(url.indexOf(findurl) == -1) {
+            window.alert("잘못된 URL 주소 입니다.");
+            document.form.url.focus();
+            return false;
+        }
+    }
 
     // db연결
     $(document).ready(function () {
