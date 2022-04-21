@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="../static/reset.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -17,107 +18,184 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
     <style>
-        * {
-            font-family: 'Jua', sans-serif;
-        }
-
-
-        body {
+        section {
+            position: relative;
             height: 100vh;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://assets.nflxext.com/ffe/siteui/vlv3/e316821f-7177-48f4-b748-e44a8b0840df/f3f5ddb4-62dd-4c72-b8fd-35320461da29/KR-ko-20220406-popsignuptwoweeks-perspective_alpha_website_large.jpg");
+            background-image: url("https://www.justwatch.com/appassets/img/home/bg-tiles/bg-tiles.png");
             background-repeat: no-repeat;
             background-size: cover;
         }
-
-        .box {
-            width: 350px;
-            height: 100px;
-            background-color: transparent;
-            margin: 100px auto 0 auto;
+        .container {
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%,-50%);
         }
-
-        .logogo {
-            font-size: xxx-large;
-            color: red;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .text{
-            font-size: x-large;
+        p{
+            margin-top: 2.8rem;
+            font-size: 25px;
             color: white;
             text-align: center;
-        }
-
-        .main_in {
-            width: 350px;
-            height: 100px;
-            margin: 30px auto 0 auto;
+            line-height: 1.4;
         }
         .main_in > button{
-            font-family: 'Jua', sans-serif;
-            font-size: x-large;
-            background-color: darkred;
             color: white;
-            width: 350px;
-            height: 100px;
+            width: 480px;
+            height: 80px;
+            border-radius: 8px;
+            background: #2641E2;
+            font-size: 20px;
+            margin: 45px auto 0 auto;
         }
         .main_in > button:hover {
-            border: 2px solid white;
-        }
-        .suggest{
-            width: 360px;
-            margin: 20px auto 0 auto;
-        }
-        .idbtn1{
-            height: 40px;
-            background-color: transparent;
-            color: white;
             border: 1px solid white;
         }
+        .suggest{
+            margin: 40px auto 0 auto;
+        }
+        .suggest > button {
+            width: 140px;
+            height: 48px;
+            color: white;
+            border: 1px solid #F1F2F8;
+            border-radius: 8px;
+            font-size: 18px;
+            margin:0 6px;
+        }
         .suggest > button:hover{
-            border: 2px solid white;
+            border: 1px solid white;
         }
-        .idbtn2{
-            width: 100px;
-            height: 40px;
-            background-color: darkred;
-            color: white;
+
+        .container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
         }
-        .idbtn3{
-            width: 100px;
-            height: 40px;
-            background-color: darkred;
-            color: white;
+        .logo {
+          position: relative;
+          width: 141px;
+          height: 212px;
+          -webkit-animation: 4s fadein;
+                  animation: 4s fadein;
+        }
+        .logo .uno, .logo .dos, .logo .tres {
+          position: absolute;
+          width: 45px;
+          height: 100%;
+          background: #1d37d2;
+        }
+        .logo .uno {
+          left: 0;
+        }
+        .logo .dos {
+          background: #2641E2;
+          left: 0;
+          z-index: 1;
+          transform-origin: top left;
+          transform: skewX(25.4deg);
+          box-shadow: 0 0 20px black;
+        }
+        .logo .tres {
+          right: 0;
+        }
+        .logo::before {
+            display: block;
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            z-index: 10;
+            width: 138%;
+            height: 17px;
+            background: black;
+            border-top-left-radius: 50% 100%;
+            border-top-right-radius: 50% 100%;
+        }
+        .name {
+            color: #fff;
+            text-transform: uppercase;
+            text-align: center;
+            letter-spacing: 9px;
+            margin-right: -9px;
+            -webkit-animation: 4s name linear;
+            animation: 4s name linear;
+            font-family: 'S-CoreDream-3Light';
+        }
+        @-webkit-keyframes fadein {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+
+        @keyframes fadein {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        @-webkit-keyframes name {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          80% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+        @keyframes name {
+          0% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          80% {
+            opacity: 0;
+            transform: scale(0.8);
+          }
+          100% {
+            opacity: 1;
+            transform: scale(1);
+          }
         }
     </style>
-    <script>
-
-    </script>
 
 </head>
 <body>
-<section class="section">
-    <div class="container">
-        <div class="box">
-            <div class="logogo"><h1>NetNote</h1></div>
+    <section class="section">
+        <div class="container">
+            <div class="logo_box">
+                <div class="logo">
+                    <div class="uno"></div>
+                    <div class="dos"></div>
+                    <div class="tres"></div>
+                </div>
+                <div class="name">NetNote</div>
+            </div>
+            <p>반갑습니다<br/>넷플릭스 컨텐츠 추천은 NetNote에서!</p>
+            <div class="main_in">
+                <button onclick="window.location.href='/main'">NetNote 미리보기</button>
+            </div>
+            <div class="suggest">
+                <button onclick="window.location.href='/sign_up'">회원가입</button>
+                <button onclick="window.location.href='/login'">로그인</button>
+            </div>
         </div>
-        <div class="text">
-            <h1>회원님 반갑습니다.</h1>
-            <h1>넷플릭스 컨텐츠 추천은 NetNote에서!</h1>
-        </div>
-        <div class="main_in">
-            <button onclick="window.location.href='/main'">NetNote 입장하기</button>
-        </div>
-        <div class="suggest">
-            <button class="idbtn1">아이디를 잊으셨나요?</button>
-            <button class="idbtn2" onclick="window.location.href='/sign_up'">회원가입</button>
-            <button class="idbtn3" onclick="window.location.href='/login'">로그인</button>
-        </div>
-    </div>
-</section>
+    </section>
 </body>
 </html>

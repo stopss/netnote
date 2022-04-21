@@ -8,53 +8,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="../static/reset.css">
     <!-- Font Awesome CSS -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@500&display=swap" rel="stylesheet">
-
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
 
-    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
-
     <style>
-        * {
-            font-family: 'Jua', sans-serif;
-        }
-
-
         body {
+            background-image: url("https://assets.nflxext.com/ffe/siteui/vlv3/8459cea4-79ab-4f27-9ef0-a7c92a30a9bb/cd501dc8-44a9-4ddf-a3cf-c8158cd3052c/KR-ko-20220411-popsignuptwoweeks-perspective_alpha_website_medium.jpg");
+        }
+        .section {
             height: 100vh;
-            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://assets.nflxext.com/ffe/siteui/vlv3/e316821f-7177-48f4-b748-e44a8b0840df/f3f5ddb4-62dd-4c72-b8fd-35320461da29/KR-ko-20220406-popsignuptwoweeks-perspective_alpha_website_large.jpg");
             background-repeat: no-repeat;
             background-size: cover;
+            background-color: rgba(255,255,255,0.8);
+            padding: 0;
         }
-
+        .container {
+            width: 100vw;
+            height: 100vh;
+        }
         .box {
-            width: 500px;
-            height: 430px;
-            margin: 100px auto 0 auto;
+            position: absolute;
+            top: 48%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            width: 540px;
+            height: 390px;
+            padding: 1.5rem 2.5rem;
         }
-
-        .logogo {
-            font-size: xxx-large;
-            color: darkred;
+        h1 {
+            font-family: 'Jockey One', sans-serif;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 19px;
+            font-size: 3rem;
+            color: #2641E2;
         }
-
+        p {
+            font-family: 'S-CoreDream-3Light';
+        }
         .button.is-sparta {
-            background-color: darkred;
-            border-color: transparent;
-            color: #fff;
+            background-color: #2E44FF;
+            color: #ffffff;
         }
-
         .button.is-sparta.is-outlined {
             background-color: transparent;
-            border-color: darkred;
-            color: darkred;
+            color: #9A9A9A;
         }
     </style>
 
@@ -104,7 +105,7 @@
 <section class="section">
     <div class="container">
         <div class="box">
-            <div class="logogo"><h1>NetNote</h1></div>
+            <h1>NetNote</h1>
             <article class="media">
                 <div class="media-content">
                     <div class="content">
@@ -133,7 +134,7 @@
                             </button>
                         </nav>
                         <hr>
-                        <h4 class="mb-3">아직 회원이 아니시라구요? </h4>
+                        <p class="mb-3">아직 회원이 아니시라구요? </p>
                         <nav class="level is-mobile">
                             <button class="level-item button is-sparta is-outlined"
                                     onclick="window.location.href='/sign_up'">
