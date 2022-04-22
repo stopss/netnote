@@ -22,12 +22,12 @@
 
 ## 🖥4. 프레젝트 화면
 <p>
-  <img width="48%" alt="LOGIN" src="https://user-images.githubusercontent.com/33679560/164689943-43e8cca2-e476-4d6b-b2f7-77d82f664f44.png">  
-  <img width="48%" alt="SIGNUP" src="https://user-images.githubusercontent.com/33679560/164690038-6b374bf7-d401-4f5b-ae35-0aa5684b24c5.png">  
+  <img width="48%" alt="LOGIN" src="https://user-images.githubusercontent.com/33679560/164689943-43e8cca2-e476-4d6b-b2f7-77d82f664f44.png"> 
+  <img width="48%" alt="SIGNUP" src="https://user-images.githubusercontent.com/33679560/164690038-6b374bf7-d401-4f5b-ae35-0aa5684b24c5.png"> 
 </p>
 <p>
-  <img width="48%" alt="MAIN" src="https://user-images.githubusercontent.com/33679560/164690088-9932e2f0-8c8a-4194-8b13-954ee0bb74be.png">  
-  <img width="48%" alt="URLMODAL" src="https://user-images.githubusercontent.com/33679560/164690143-ca360e41-1780-43f6-b87d-4b8ab3be492f.png">  
+  <img width="48%" alt="MAIN" src="https://user-images.githubusercontent.com/33679560/164690088-9932e2f0-8c8a-4194-8b13-954ee0bb74be.png"> 
+  <img width="48%" alt="URLMODAL" src="https://user-images.githubusercontent.com/33679560/164690143-ca360e41-1780-43f6-b87d-4b8ab3be492f.png"> 
 </p>
 <p align="center">
   <img width="48%" alt="VIEW" src="https://user-images.githubusercontent.com/33679560/164690189-a9f85041-9386-41fe-8964-c455653964f0.png">
