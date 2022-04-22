@@ -14,7 +14,7 @@
 <br/>
 
 ## 🛠3. 사용한 기술
-+ 언어 : Python3, HTML, CSS JavaScript
++ 언어 : Python3, HTML, CSS, JavaScript
 + 프레임워크 / 라이브러리 : Flask, Jquery, Bulma
 + 협업툴 : Git, Github, Figma
 + 데이터베이스 : MongoDB  
