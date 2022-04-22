@@ -1,10 +1,13 @@
 ## 📺1. 프로젝트 소개 - NETNOTE
-![HOME](https://user-images.githubusercontent.com/33679560/164689844-19268b97-00c2-4c4a-98ff-7a910e1a87e6.png)
+<p align="center">
+  <img width="90%" alt="HOME" src="https://user-images.githubusercontent.com/33679560/164689844-19268b97-00c2-4c4a-98ff-7a910e1a87e6.png">  
+</p>  
+
 > 넷플릭스에서 제공하는 컨텐츠 감상 후 기록하여 다른 사용자들과 공유하는 커뮤니티 사이트 입니다.  
 <br/>
 
 ## 👨‍👩‍👧2. 제작기간 및 팀원 소개
-2022-04-05 ~ 2022-04-21  
+📅 2022-04-05 ~ 2022-04-21  
   + [고승유](https://github.com/Koseungyu) - 로그인 페이지, 회원가입 페이지  
   + [김은진](https://github.com/eunjin090) - 메인 페이지, URL 모달창, 디자인 총괄  
   + [정지은](https://github.com/stopss) - 상세 페이지, 기록 페이지  
@@ -32,5 +35,6 @@
 <br/>
 
 ## 📄5. API 설계  
-
-
+<p align="center">
+  <img width="90%" alt="api" src="https://user-images.githubusercontent.com/33679560/164708326-a2f349fe-cad7-4402-9e25-62b5fd8b8422.JPG">  
+</p>  
