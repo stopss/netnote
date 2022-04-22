@@ -1,6 +1,6 @@
 ## 📺1. 프로젝트 소개 - NETNOTE
 <p align="center">
-  <img width="90%" alt="HOME" src="https://user-images.githubusercontent.com/33679560/164689844-19268b97-00c2-4c4a-98ff-7a910e1a87e6.png">  
+  <img width="95%" alt="HOME" src="https://user-images.githubusercontent.com/33679560/164689844-19268b97-00c2-4c4a-98ff-7a910e1a87e6.png">  
 </p>  
 
 > 넷플릭스에서 제공하는 컨텐츠 감상 후 기록하여 다른 사용자들과 공유하는 커뮤니티 사이트 입니다.  
