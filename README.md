@@ -20,7 +20,7 @@
 + 데이터베이스 : MongoDB  
 <br/>
 
-## 🖥4. 프레젝트 화면
+## 🖥4. 프로젝트 화면
 <p>
   <img width="48%" alt="LOGIN" src="https://user-images.githubusercontent.com/33679560/164689943-43e8cca2-e476-4d6b-b2f7-77d82f664f44.png"> 
   <img width="48%" alt="SIGNUP" src="https://user-images.githubusercontent.com/33679560/164690038-6b374bf7-d401-4f5b-ae35-0aa5684b24c5.png"> 
