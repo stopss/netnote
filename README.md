@@ -8,7 +8,7 @@
 
 ## 👨‍👩‍👧2. 제작기간 및 팀원 소개
 📅 2022-04-05 ~ 2022-04-21  
-  + [고승유](https://github.com/Koseungyu) - 로그인 페이지, 회원가입 페이지  
+  + [고승유](https://github.com/Koseungyu) - 홈 페이지, 로그인 페이지, 회원가입 페이지  
   + [김은진](https://github.com/eunjin090) - 메인 페이지, URL 모달창, 디자인 총괄  
   + [정지은](https://github.com/stopss) - 상세 페이지, 기록 페이지  
 <br/>
